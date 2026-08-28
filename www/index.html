@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https: 'unsafe-eval' ws: wss:; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: https: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover, user-scalable=no">
+    <meta name="color-scheme" content="dark">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Method">
+    <meta name="theme-color" content="#0a0e27">
+
+    <link rel="stylesheet" href="css/design-system.css">
+        <meta name="theme-color" content="#0a0e1a">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/games.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/profile.css">
+
+    <title>Method - Gaming Platform</title>
+</head>
+<body>
+    <div id="app-container">
+        <div id="splash-screen" class="screen active">
+            <div class="screen-content flex-center">
+                <div class="text-center">
+                        <img class="method-logo method-logo-splash" src="img/method-logo.png" alt="Method">
+                    <div class="spinner" style="margin: 0 auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="login-screen" class="screen hidden">
+            <div class="auth-container">
+                <div class="auth-header">
+                        <img class="method-logo method-logo-auth" src="img/method-logo.png" alt="Method">
+                    <h1 class="auth-title">Welcome</h1>
+                    <p class="auth-subtitle">Sign in to access Method</p>
+                </div>
+                <form class="auth-form" id="login-form">
+                    <div class="auth-input-group">
+                        <input type="text" id="login-username" placeholder="Username" required>
+                        <div class="auth-input-error"></div>
+                    </div>
+                    <div class="auth-input-group">
+                        <input type="password" id="login-password" placeholder="Password" required>
+                        <div class="auth-input-error"></div>
+                    </div>
+                    <button type="submit" class="auth-button" id="login-submit">Sign In</button>
+                </form>
+                <div class="auth-link">
+                    No account? <a href="#" onclick="showRegisterScreen()">Create one</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="register-screen" class="screen hidden">
+            <div class="auth-container">
+                <div class="auth-header">
+                        <img class="method-logo method-logo-auth" src="img/method-logo.png" alt="Method">
+                    <h1 class="auth-title">Create Account</h1>
+                    <p class="auth-subtitle">Join Method Gaming Platform</p>
+                </div>
+                <form class="auth-form" id="register-form">
+                    <div class="auth-input-group">
+                        <input type="text" id="register-username" placeholder="Username" required>
+                        <div class="auth-input-error"></div>
+                    </div>
+                    <div class="auth-input-group">
+                        <input type="email" id="register-email" placeholder="Email" required>
+                        <div class="auth-input-error"></div>
+                    </div>
+                    <div class="auth-input-group">
+                        <input type="password" id="register-password" placeholder="Password" required>
+                        <div class="auth-input-error"></div>
+                        <div class="password-strength"></div>
+                    </div>
+                    <div class="auth-input-group">
+                        <input type="password" id="register-confirm" placeholder="Confirm Password" required>
+                        <div class="auth-input-error"></div>
+                    </div>
+                    <button type="submit" class="auth-button" id="register-submit">Create Account</button>
+                </form>
+                <div class="auth-link">
+                    Already have an account? <a href="#" onclick="showLoginScreen()">Sign in</a>
+                </div>
+            </div>
+        </div>
+
+        <main id="app-main" class="hidden">
+            <div id="home-page" class="page active">
+                <div class="page-header">
+                    <h1>Welcome</h1>
+                    <p>Discover the gaming platform</p>
+                </div>
+                <div class="page-content">
+                    <div class="home-hero">
+                        <h1>Method Gaming</h1>
+                        <p>Experience the next generation of gaming with real-time multiplayer features</p>
+                    </div>
+                    <div class="home-stats">
+                        <div class="stat-card">
+                            <div class="stat-value">0</div>
+                            <div class="stat-label">Players</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">0</div>
+                            <div class="stat-label">Games</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">0</div>
+                            <div class="stat-label">Hours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="games-page" class="page hidden">
+                <div class="page-header">
+                    <h1>Games</h1>
+                    <p>Explore available games</p>
+                </div>
+                <div class="page-content">
+                    <div class="games-container" id="games-list"></div>
+                </div>
+            </div>
+
+            <div id="chat-page" class="page hidden">
+                <div class="chat-header">
+                    <div>
+                        <div class="chat-title">Global Chat</div>
+                        <div class="chat-online"><span>Online</span></div>
+                    </div>
+                </div>
+                <div class="chat-messages" id="chat-messages"></div>
+                <div class="chat-input-area">
+                    <div class="chat-input-wrapper">
+                        <textarea id="chat-input" class="chat-input" placeholder="Write a message..." maxlength="500"></textarea>
+                    </div>
+                    <button class="chat-send-btn" id="chat-send">→</button>
+                </div>
+                <div class="chat-status" id="chat-status"></div>
+            </div>
+
+            <div id="profile-page" class="page hidden">
+                <div class="page-content">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <div class="profile-avatar-image" id="profile-avatar">U</div>
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-username" id="profile-username">Username</div>
+                            <div class="profile-handle" id="profile-handle">@username</div>
+                        </div>
+                        <div class="profile-meta">
+                            <div class="profile-meta-item">
+                                <span>Member since</span>
+                                <span class="profile-meta-value" id="profile-joined">---</span>
+                            </div>
+                            <div class="profile-meta-item">
+                                <span>Last seen</span>
+                                <span class="profile-meta-value" id="profile-lastseen">Now</span>
+                            </div>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="profile-action-btn primary" id="edit-profile-btn">Edit Profile</button>
+                            <button class="profile-action-btn" id="logout-btn">Logout</button>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <div class="profile-section-title">Statistics</div>
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <div class="profile-stat-label">Games Played</div>
+                                <div class="profile-stat-value">0</div>
+                            </div>
+                            <div class="profile-stat">
+                                <div class="profile-stat-label">Wins</div>
+                                <div class="profile-stat-value">0</div>
+                            </div>
+                            <div class="profile-stat">
+                                <div class="profile-stat-label">Win Rate</div>
+                                <div class="profile-stat-value">0%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <div class="profile-section-title">Coming Soon</div>
+                        <div class="profile-coming-soon">
+                            <div class="profile-coming-soon-icon">★</div>
+                            <div class="profile-coming-soon-text">Achievements, leaderboards, and more features coming soon</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="edit-profile-page" class="page hidden">
+                <div class="page-header">
+                    <h1>Edit Profile</h1>
+                    <p>Update your profile information</p>
+                </div>
+                <div class="page-content">
+                    <div class="profile-avatar" style="text-align: center; margin-bottom: var(--spacing-6);">
+                        <div class="profile-avatar-image" id="edit-avatar">U</div>
+                        <div style="margin-top: var(--spacing-3); display: flex; gap: var(--spacing-2); justify-content: center;">
+                            <button class="btn btn-secondary btn-sm" id="upload-avatar-btn">Upload Avatar</button>
+                            <button class="btn btn-secondary btn-sm" id="delete-avatar-btn">Remove</button>
+                        </div>
+                        <input type="file" id="avatar-file" accept="image/jpeg,image/png,image/webp" style="display: none;">
+                    </div>
+
+                    <form id="edit-profile-form">
+                        <div class="profile-form-group">
+                            <label class="profile-form-label">Username</label>
+                            <input type="text" class="profile-form-input" id="edit-username" maxlength="20" required>
+                            <div class="form-error"></div>
+                        </div>
+
+                        <div class="profile-form-actions">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="button" class="btn btn-secondary" onclick="showProfilePage()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <nav id="app-nav" class="hidden">
+            <div class="nav-items">
+                <div class="nav-item active" data-page="home" onclick="navigateToPage('home')">
+                    <div class="nav-icon">⌂</div>
+                    <div class="nav-label">Home</div>
+                </div>
+                <div class="nav-item" data-page="games" onclick="navigateToPage('games')">
+                    <div class="nav-icon">★</div>
+                    <div class="nav-label">Games</div>
+                </div>
+                <div class="nav-item" data-page="chat" onclick="navigateToPage('chat')">
+                    <div class="nav-icon">◎</div>
+                    <div class="nav-label">Chat</div>
+                </div>
+                <div class="nav-item" data-page="profile" onclick="navigateToPage('profile')">
+                    <div class="nav-icon">◈</div>
+                    <div class="nav-label">Profile</div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <script src="cordova.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/socket.js"></script>
+    <script src="js/pages/splash.js"></script>
+    <script src="js/pages/login.js"></script>
+    <script src="js/pages/register.js"></script>
+    <script src="js/pages/home.js"></script>
+    <script src="js/pages/games.js"></script>
+    <script src="js/pages/chat.js"></script>
+    <script src="js/pages/profile.js"></script>
+    <script src="js/pages/editProfile.js"></script>
+    <script src="js/modules/gameData.js"></script>
+    <script src="js/modules/gameRenderer.js"></script>
+    <script src="js/modules/chatMessages.js"></script>
+    <script src="js/modules/userProfile.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "name": "method-gaming-platform",
+  "displayName": "Method",
+  "version": "1.0.0",
+  "description": "Modern Gaming Platform with Real-time Chat",
+  "main": "index.js",
+  "scripts": {
+    "serve": "cd server && npm start",
+    "serve:dev": "cd server && npm run dev",
+    "cordova:build": "cordova build",
+    "cordova:build-android": "cordova build android",
+    "cordova:run": "cordova run browser",
+    "cordova:prepare": "cordova prepare"
+  },
+  "keywords": [
+    "cordova",
+    "gaming",
+    "real-time",
+    "chat"
+  ],
+  "author": "Method Team",
+  "license": "MIT",
+  "devDependencies": {
+    "cordova-browser": "^7.0.0"
+  },
+  "cordova": {
+    "platforms": [
+      "browser"
+    ]
+  }
+}
