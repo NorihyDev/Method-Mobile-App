@@ -19,9 +19,9 @@ function registerPageInit() {
     const password = passwordInput.value;
     const confirmPassword = confirmInput.value;
 
-    const validation = validation.validateRegisterForm(username, email, password, confirmPassword);
-    if (!validation.isValid) {
-      ui.displayFormErrors(form, validation.errors);
+    const validationResult = validation.validateRegisterForm(username, email, password, confirmPassword);
+    if (!validationResult.isValid) {
+      ui.displayFormErrors(form, validationResult.errors);
       return;
     }
 

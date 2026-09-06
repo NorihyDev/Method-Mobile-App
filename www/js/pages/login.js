@@ -11,9 +11,9 @@ function loginPageInit() {
     const username = usernameInput.value.trim();
     const password = passwordInput.value;
 
-    const validation = validation.validateLoginForm(username, password);
-    if (!validation.isValid) {
-      ui.displayFormErrors(form, validation.errors);
+    const validationResult = validation.validateLoginForm(username, password);
+    if (!validationResult.isValid) {
+      ui.displayFormErrors(form, validationResult.errors);
       return;
     }
 

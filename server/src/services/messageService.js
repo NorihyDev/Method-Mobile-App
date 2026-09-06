@@ -14,7 +14,7 @@
 
     const saveMessage = async (userId, messageText) => {
     const result = await query('INSERT INTO messages (user_id, message, created_at) VALUES (?, ?, NOW())', [userId, messageText]);
-    return result.insertId;
+    return Number(result.insertId);
     };
 
     module.exports = {

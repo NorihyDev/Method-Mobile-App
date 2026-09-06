@@ -15,9 +15,14 @@ const { setupChatNamespace } = require('./sockets/chatNamespace');
 
 const app = express();
 const server = http.createServer(app);
+const frontendOrigins = (process.env.FRONTEND_URL || 'http://localhost:8000')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 const io = socketIo(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:8000',
+    origin: frontendOrigins,
     methods: ['GET', 'POST']
   }
 });
@@ -33,7 +38,7 @@ const globalLimiter = rateLimit({
 
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:8000',
+  origin: frontendOrigins,
   credentials: true
 }));
 app.use(globalLimiter);
